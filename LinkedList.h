@@ -2,9 +2,10 @@
 // Created by tothe on 9/22/2026.
 //
 
+#pragma once
+#include <iostream>
 #include "Node.h"
 #include "List.h"
-#include <iostream>
 
 template <typename T>
 class LinkedList : public List<T> {
