@@ -77,6 +77,27 @@ public:
         ++size_;
     }
 
+    void deleteAnywhere(int position) override {
+        if (position < 0 || position >= size_) {
+            std::cout << "Invalid position." << std::endl;
+            return;
+        }
+
+        delete data_[position];
+
+        for (int i = position; i < size_ - 1; ++i) {
+            data_[i] = data_[i + 1];
+        }
+
+        --size_;
+    }
+
+    void reverse() override {
+    }
+
+    void concat(List<T>* other) override {
+    }
+
     ~ArrayList() override {
         for (int i = 0; i < size_; ++i) {
             delete data_[i];
