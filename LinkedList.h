@@ -2,6 +2,7 @@
 // Created by tothe on 9/22/2026.
 //
 
+
 #pragma once
 #include <iostream>
 #include "Node.h"
@@ -31,7 +32,6 @@ public:
 
         delete doomed->data;
         delete doomed;
-
         --size_;
     }
 
@@ -106,11 +106,22 @@ public:
 
         delete doomed->data;
         delete doomed;
-
         --size_;
     }
 
     void reverse() override {
+        Node<T>* previous = nullptr;
+        Node<T>* current = head_;
+        Node<T>* next = nullptr;
+
+        while (current != nullptr) {
+            next = current->next;
+            current->next = previous;
+            previous = current;
+            current = next;
+        }
+
+        head_ = previous;
     }
 
     void concat(List<T>* other) override {

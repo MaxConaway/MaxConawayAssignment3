@@ -2,6 +2,7 @@
 // Created by tothe on 9/22/2026.
 //
 
+
 #pragma once
 #include <iostream>
 #include "List.h"
@@ -43,8 +44,9 @@ public:
 
     bool search(T* value) const override {
         for (int i = 0; i < size_; ++i) {
-            if (*data_[i] == *value)
+            if (*data_[i] == *value) {
                 return true;
+            }
         }
 
         return false;
@@ -93,6 +95,17 @@ public:
     }
 
     void reverse() override {
+        int left = 0;
+        int right = size_ - 1;
+
+        while (left < right) {
+            T* temp = data_[left];
+            data_[left] = data_[right];
+            data_[right] = temp;
+
+            ++left;
+            --right;
+        }
     }
 
     void concat(List<T>* other) override {
