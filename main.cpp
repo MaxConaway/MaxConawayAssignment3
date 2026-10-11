@@ -2,41 +2,45 @@
 // Created by tothe on 9/22/2026.
 //
 
+
 #include <iostream>
+#include <memory>
 #include "List.h"
-#include "Data.h"
+#include "Player.h"
 
 int main() {
-    std::unique_ptr<List<int>> list = makeList<int>();
-
-    list->addFront(new int(10));
-    list->addFront(new int(20));
-    list->addFront(new int(30));
-
-    list->print();
-
-    int key = 20;
-
-    std::cout << "search(20): "
-              << (list->search(&key) ? "found" : "not found")
+    // Part 1: Test the new list operations
+    std::cout << "== List<int>: addAnywhere / deleteAnywhere / reverse =="
               << std::endl;
 
-    list->deleteFront();
-    list->print();
+    std::unique_ptr<List<int>> nums = makeList<int>();
 
-    std::unique_ptr<List<Data>> roster = makeList<Data>();
+    nums->addFront(new int(10));
+    nums->addFront(new int(20));
+    nums->addFront(new int(30));
+    nums->print();
 
-    roster->addFront(new Data(1, "Alice"));
-    roster->addFront(new Data(2, "Bilal"));
-    roster->addFront(new Data(3, "Chen"));
+    nums->addAnywhere(1, new int(99));
+    nums->print();
 
-    roster->print();
+    nums->deleteAnywhere(2);
+    nums->print();
 
-    Data query(2, "");
+    nums->reverse();
+    nums->print();
 
-    std::cout << "search(id 2): "
-              << (roster->search(&query) ? "found" : "not found")
-              << std::endl;
+    std::cout << std::endl;
+    std::cout << "== List<int>: concat ==" << std::endl;
+
+    std::unique_ptr<List<int>> more = makeList<int>();
+
+    more->addFront(new int(2));
+    more->addFront(new int(1));
+    more->print();
+
+    nums->concat(more.get());
+    nums->print();
+    more->print();
 
     return 0;
 }
