@@ -2,7 +2,6 @@
 // Created by tothe on 9/22/2026.
 //
 
-
 #pragma once
 #include <iostream>
 #include "List.h"
@@ -109,6 +108,24 @@ public:
     }
 
     void concat(List<T>* other) override {
+        ArrayList<T>* otherList = dynamic_cast<ArrayList<T>*>(other);
+
+        if (otherList == nullptr) {
+            std::cout << "Cannot concat different list types." << std::endl;
+            return;
+        }
+
+        if (size_ + otherList->size_ > CAPACITY) {
+            std::cout << "ArrayList does not have enough space." << std::endl;
+            return;
+        }
+
+        for (int i = 0; i < otherList->size_; ++i) {
+            data_[size_ + i] = otherList->data_[i];
+        }
+
+        size_ += otherList->size_;
+        otherList->size_ = 0;
     }
 
     ~ArrayList() override {
