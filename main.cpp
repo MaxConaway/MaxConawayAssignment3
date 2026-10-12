@@ -48,10 +48,10 @@ int main() {
     // Uno game
     std::cout << std::endl;
     std::cout << "== Uno Turn Order ==" << std::endl;
-    
+
     std::unique_ptr<List<Player>> table1 = makeList<Player>();
 
-    table1->addFront(new Player(3, "Charlie"));
+    table1->addFront(new Player(3, "David"));
     table1->addFront(new Player(2, "Bob"));
     table1->addFront(new Player(1, "Alice"));
 
